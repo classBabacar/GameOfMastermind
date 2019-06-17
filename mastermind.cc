@@ -58,7 +58,7 @@ void mastermind::scenarioOne()
 
     cout << "You have guessed " << YELLOW << "1 color" << WHITE << " in the correct position and ";
     cout << YELLOW << "3 colors" << WHITE << " are NOT in the secret code." << endl;
-    cout << "You would see a result like this." << displayResult(0, 1, 3);
+    cout << "You would see a result like this." << displayResult(1, 1, 2);
 }
 
 string mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced)
@@ -67,13 +67,14 @@ string mastermind::displayResult(int notInSecret, int correctlyPlaced, int incor
     cout << "----------" << endl;
 
     //Correctly Placed
-    for (int i = 0; i < correctlyPlaced; ++i)
+    //0 1 3
+    for (int i = 0; i < incorrectlyPlaced; ++i)
     {
         if (i % 2 == 0)
         {
             cout << WHITE << "+ ";
         }
-        cout << GREEN << " O ";
+        cout << RED << " O ";
         if (i % 2 == 1)
         {
             cout << WHITE << " + " << endl;
@@ -81,7 +82,7 @@ string mastermind::displayResult(int notInSecret, int correctlyPlaced, int incor
     }
 
     //Not in the secret code
-    for (int i = correctlyPlaced; i < notInSecret + correctlyPlaced; ++i)
+    for (int i = incorrectlyPlaced; i < notInSecret + incorrectlyPlaced; ++i)
     {
         if (i % 2 == 0)
         {
@@ -95,13 +96,13 @@ string mastermind::displayResult(int notInSecret, int correctlyPlaced, int incor
     }
 
     //Not incorrencly placed
-    for (int i = correctlyPlaced + notInSecret; i < notInSecret + correctlyPlaced + incorrectlyPlaced; ++i)
+    for (int i = incorrectlyPlaced + notInSecret; i < notInSecret + correctlyPlaced + incorrectlyPlaced; ++i)
     {
         if (i % 2 == 0)
         {
             cout << WHITE << "+ ";
         }
-        cout << RED << " O ";
+        cout << GREEN << " O ";
         if (i % 2 == 1)
         {
             cout << WHITE << " + " << endl;
