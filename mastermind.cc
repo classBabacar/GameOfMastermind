@@ -26,7 +26,7 @@ void mastermind::differentColorsTutorial()
         differentColorsTutorial();
     }
 }
-
+//uh
 void mastermind::userGuideline()
 {
     cout << YELLOW << "The idea to this game is to guess a secret code of 4 or more colors in a limited number of rounds." << endl;
