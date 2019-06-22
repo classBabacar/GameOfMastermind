@@ -1,4 +1,7 @@
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "colors.h"
 using namespace std;
 
@@ -9,10 +12,17 @@ public:
     void differentColorsTutorial();
     void userGuideline();
     void scenarioOne();
+    void scenarioTwo();
+    void scenarioThree();
 
     //GameTime Functions
     string stringToColor(string password);
-    string displayResult(int correctlyPlaced, int notInSecret, int incorrectlyPlaced);
+
+    //Random Sequences
+    void displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize, int choose);
+    void resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize);
+    void resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize);
+    void resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize);
 
 private:
     string password;
