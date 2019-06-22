@@ -54,6 +54,7 @@ void mastermind::userGuideline()
 void mastermind::scenarioOne()
 {
     srand(time(NULL));
+    cout << endl;
     int chooser = rand() % 3;
 
     cout << "Scenario #1" << endl;
@@ -95,6 +96,7 @@ void mastermind::scenarioOne()
 }
 void mastermind::scenarioTwo()
 {
+    cout << endl;
     int chooser = rand() % 3;
 
     cout << "Scenario #2" << endl;
