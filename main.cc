@@ -1,4 +1,5 @@
 #include <iostream>
+#include <typeinfo>
 #include "colors.h"
 #include "mastermind.h"
 
@@ -8,11 +9,31 @@ void stringToColor(string matcher);
 
 int main()
 {
-     //string matcher = "rgbywcp";
-     //stringToColor(matcher);
-
      mastermind obj;
-     obj.differentColorsTutorial();
+     string matcher = "rgbywcp";
+
+     int choice;
+     while (choice != 4)
+     {
+          cout << WHITE << "Mastermind : " << obj.stringToColor(matcher);
+          cout << RED << "1 - Tutorial for Mastermind." << endl;
+          cout << BLUE << "2 - Human v AI." << endl;
+          cout << PINK << "3 - Donald Knuth AI." << endl;
+          cout << YELLOW << "4 - Exit." << endl;
+          cout << WHITE << "Enter your choice : ";
+          cin >> choice;
+
+          cout << endl;
+          switch (choice)
+          {
+          case 1:
+               obj.differentColorsTutorial();
+               break;
+
+          default:
+               break;
+          }
+     }
      /*cout << WHITE << "Welcome to " << YELLOW << "Mastermind!!!" << endl;
     cout << WHITE << endl;*/
      // cout << endl;
