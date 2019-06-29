@@ -19,10 +19,14 @@ public:
     string stringToColor(string password);
 
     //Random Sequences
-    void displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize, int choose);
-    void resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize);
-    void resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize);
-    void resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize);
+    void displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize, int choose);
+    void resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize);
+    void resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize);
+    void resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize);
+
+    //AI functionality
+    void aiPlay(int totalColors);
+    string generateSecret(int totalColors);
 
 private:
     string password;
