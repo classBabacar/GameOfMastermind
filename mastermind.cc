@@ -53,7 +53,6 @@ void mastermind::userGuideline()
 
 void mastermind::scenarioOne()
 {
-    srand(time(NULL));
     cout << endl;
     int chooser = rand() % 3;
 
@@ -175,29 +174,29 @@ void mastermind::scenarioThree()
     //Have a function call to the menu
 }
 
-void mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize, int chooser)
+void mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize, int chooser)
 {
     if (chooser == 0)
     {
-        resultPatternOne(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, maxSize);
+        resultPatternOne(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, colorSize);
     }
     else if (chooser == 1)
     {
-        resultPatternTwo(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, maxSize);
+        resultPatternTwo(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, colorSize);
     }
     else
     {
-        resultPatternThree(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, maxSize);
+        resultPatternThree(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, colorSize);
     }
 }
-void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize)
+void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
     if (counter % 2 == 0)
     {
         cout << BLUE << " + ";
         if (counter >= 2)
         {
-            if (maxSize == 0)
+            if (colorSize == 0)
             {
                 return;
             }
@@ -210,28 +209,28 @@ void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int inco
     if (notInSecret > 0) //
     {
         cout << WHITE << " O ";
-        return resultPatternOne(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, maxSize - 1);
+        return resultPatternOne(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
     else if (correctlyPlaced > 0)
     {
         cout << GREEN << " O ";
-        return resultPatternOne(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, maxSize - 1);
+        return resultPatternOne(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
     else if (incorrectlyPlaced > 0)
     {
         cout << RED << " O ";
-        return resultPatternOne(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, maxSize - 1);
+        return resultPatternOne(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, colorSize - 1);
     }
 }
 
-void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize)
+void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
     if (counter % 2 == 0)
     {
         cout << BLUE << " + ";
         if (counter >= 2)
         {
-            if (maxSize == 0)
+            if (colorSize == 0)
             {
                 return;
             }
@@ -244,28 +243,28 @@ void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int inco
     if (correctlyPlaced > 0)
     {
         cout << GREEN << " O ";
-        return resultPatternTwo(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, maxSize - 1);
+        return resultPatternTwo(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
     else if (incorrectlyPlaced > 0)
     {
         cout << RED << " O ";
-        return resultPatternTwo(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, maxSize - 1);
+        return resultPatternTwo(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, colorSize - 1);
     }
     else if (notInSecret > 0) //
     {
         cout << WHITE << " O ";
-        return resultPatternTwo(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, maxSize - 1);
+        return resultPatternTwo(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
 }
 
-void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int maxSize)
+void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
     if (counter % 2 == 0)
     {
         cout << BLUE << " + ";
         if (counter >= 2)
         {
-            if (maxSize == 0)
+            if (colorSize == 0)
             {
                 return;
             }
@@ -278,19 +277,39 @@ void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int in
     if (incorrectlyPlaced > 0)
     {
         cout << RED << " O ";
-        return resultPatternThree(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, maxSize - 1);
+        return resultPatternThree(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, colorSize - 1);
     }
     else if (notInSecret > 0) //
     {
         cout << WHITE << " O ";
-        return resultPatternThree(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, maxSize - 1);
+        return resultPatternThree(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
     else if (correctlyPlaced > 0)
     {
         cout << GREEN << " O ";
-        return resultPatternThree(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, maxSize - 1);
+        return resultPatternThree(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
 }
+void mastermind::aiPlay(int totalColors)
+{
+    string x = generateSecret(totalColors);
+}
+string mastermind::generateSecret(int totalColors)
+{
+    string secretCode;
+    char colors[] = {'r', 'g', 'b', 'y', 'w', 'p', 'c'};
+    int random;
+
+    for (int i = 0; i < totalColors; ++i)
+    {
+        random = rand() % 7;
+        secretCode += colors[random];
+    }
+    cout << "secret code is " << secretCode << endl;
+    stringToColor(secretCode);
+    return secretCode;
+}
+
 string mastermind::stringToColor(string password)
 {
 

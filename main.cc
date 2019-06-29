@@ -1,5 +1,4 @@
 #include <iostream>
-#include <typeinfo>
 #include "colors.h"
 #include "mastermind.h"
 
@@ -9,6 +8,8 @@ void stringToColor(string matcher);
 
 int main()
 {
+     srand(time(NULL));
+
      mastermind obj;
      string matcher = "rgbywcp";
 
@@ -28,6 +29,9 @@ int main()
           {
           case 1:
                obj.differentColorsTutorial();
+               break;
+          case 2:
+               obj.aiPlay(4); // Right now im going to hard code this number but change it eventually
                break;
 
           default:
