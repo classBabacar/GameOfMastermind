@@ -3,11 +3,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include "colors.h"
+#include "piece.h"
+
 using namespace std;
 
 class mastermind
 {
 public:
+    //constructor
+    mastermind();
+
     //Tutorial
     void differentColorsTutorial();
     void userGuideline();
@@ -29,5 +34,7 @@ public:
     string generateSecret(int totalColors);
 
 private:
-    string password;
+    int attempts;
+    // string password;
+    //piece password;
 };

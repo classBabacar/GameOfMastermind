@@ -1,5 +1,9 @@
 #include "mastermind.h"
 
+mastermind::mastermind()
+{
+    attempts = 10;
+}
 void mastermind::differentColorsTutorial()
 {
     cout << "There are 7 different colors " << endl;
@@ -290,9 +294,18 @@ void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int in
         return resultPatternThree(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
 }
+//Goals:
+//1 : Mkae a display for guessed color and result  in colors
+//2 : Keep on adding guesses visually pleasing
 void mastermind::aiPlay(int totalColors)
 {
+    int start = 0;
     string x = generateSecret(totalColors);
+    // while (start < attempts)
+    // {
+    //     cout << start << endl;
+    //     start++;
+    // }
 }
 string mastermind::generateSecret(int totalColors)
 {
@@ -306,6 +319,7 @@ string mastermind::generateSecret(int totalColors)
         secretCode += colors[random];
     }
     cout << "secret code is " << secretCode << endl;
+    // cout << "attempts" << attempts << endl;
     stringToColor(secretCode);
     return secretCode;
 }
