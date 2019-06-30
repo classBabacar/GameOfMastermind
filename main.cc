@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void stringToColor(string matcher);
+// void stringToColor(string matcher);
 
 int main()
 {
@@ -13,6 +13,7 @@ int main()
      mastermind obj;
      string matcher = "rgbywcp";
 
+     cout << "GAME NOT COMPLETE YET!!!!" << endl;
      int choice;
      while (choice != 4)
      {
