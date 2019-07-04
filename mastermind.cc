@@ -3,6 +3,11 @@
 mastermind::mastermind()
 {
     attempts = 10;
+    char availableColors[] = {'r', 'g', 'b', 'y', 'w', 'p', 'c'};
+    for (int i = 0; i < 7; ++i)
+    {
+        colors[i] = availableColors[i];
+    }
 }
 void mastermind::differentColorsTutorial()
 {
@@ -294,23 +299,80 @@ void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int in
         return resultPatternThree(notInSecret, correctlyPlaced - 1, incorrectlyPlaced, counter + 1, colorSize - 1);
     }
 }
+
+//Making sure the string has valid colors
+bool mastermind::checkValidColors(string userGuess)
+{
+    int totalColors = 7;
+    bool tracker;
+    for (int i = 0; i < userGuess.size(); ++i)
+    {
+        tracker = false;
+        for (int j = 0; j < totalColors; ++j)
+        {
+            if (userGuess[i] == colors[j])
+            {
+                tracker = true;
+            }
+        }
+        if (tracker == false)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+//Parsing the users guess to make sure it doesnt debunk
+string mastermind::authenticateGuess(int totalColors)
+{
+    cout << WHITE << "What do you think the secret is : ";
+    string userGuess;
+    cin >> userGuess;
+
+    cout << endl;
+    //Filer longer input than string also having valid colors in string
+    while ((!checkValidColors(userGuess)) || (userGuess.size() != totalColors))
+    {
+        cout << "Sorry that was an invalid input. " << RED << "Try again." << endl;
+        cout << WHITE << "What do you think the secret is : ";
+        cin >> userGuess;
+        cout << endl;
+    }
+
+    cout << "Your choice: " << stringToColor(userGuess);
+    cout << WHITE << "Are you comfortable with this choice? (y/n) : ";
+    char rsp;
+    cin >> rsp;
+
+    if (tolower(rsp) == 'y')
+    {
+        return userGuess;
+    }
+    else
+    {
+        string tmp = authenticateGuess(totalColors);
+    }
+}
 //Goals:
 //1 : Mkae a display for guessed color and result  in colors
 //2 : Keep on adding guesses visually pleasing
 void mastermind::aiPlay(int totalColors)
 {
     int start = 0;
-    string x = generateSecret(totalColors);
-    // while (start < attempts)
-    // {
+    string secretCode = generateSecret(totalColors); // Ai Chosen Guess
+    string userGuess;                                // Storing user guesses
+
+    userGuess = authenticateGuess(totalColors);
+    //while (start < attempts)
+    ///{
     //     cout << start << endl;
     //     start++;
-    // }
+    //}
 }
 string mastermind::generateSecret(int totalColors)
 {
     string secretCode;
-    char colors[] = {'r', 'g', 'b', 'y', 'w', 'p', 'c'};
     int random;
 
     for (int i = 0; i < totalColors; ++i)
