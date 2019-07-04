@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 #include "colors.h"
 #include "piece.h"
 
@@ -22,6 +23,8 @@ public:
 
     //GameTime Functions
     string stringToColor(string password);
+    string authenticateGuess(int totalColors);
+    bool checkValidColors(string userGuess);
 
     //Random Sequences
     void displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize, int choose);
@@ -35,6 +38,7 @@ public:
 
 private:
     int attempts;
+    char colors[7];
     // string password;
     //piece password;
 };
