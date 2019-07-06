@@ -6,8 +6,8 @@ Donald Knuth noted in the past that the game called mastermind, can be solved in
 - The game at first can be a little tricky and I want the people to understand how it's played. So if you've never played mastermind go through the tutorial I hope I explained it well.
 
 # Update
-- **6/22/2019** I think I came up with a good algorithm to help the game scale now. Now the user can enter any value of 2 , 4 , 6 , N+2... and the display scales with the help of recursion.
-
 - **6/29/2019** Menu added and way to generate a random color, I'm most likely going to use a struct to minimize the game and make it easier to handle.
 
 - **7/4/2019** Added a authentication system to make sure the game wouldn't debunk at random spots now all that is left is the results algorithm and I'm thinking of a way to make the game appealing in the results stage.
+
+- **7/6/2019** Structs are GREAT!!! I makes the code packagable and it helps with readibility I think.
