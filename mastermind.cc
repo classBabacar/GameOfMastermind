@@ -44,7 +44,8 @@ void mastermind::userGuideline()
     cout << RED << "2)" << WHITE << " Ai generated secret code. " << endl;
     cout << endl;
     cout << "In the case that a user generated a secret code that was: y b g r " << endl;
-    cout << "It would be Yellow Blue Green Red or equivalently: " << stringToColor("ybgr") << WHITE << endl;
+    cout << "It would be Yellow Blue Green Red or equivalently: " << stringToColor("ybgr") << WHITE << endl
+         << endl;
     cout << "Now let's proceed to the scenarios of guessing are you ready to continue (y/n) ?" << endl;
     char rsp;
     cin >> rsp;
@@ -67,7 +68,8 @@ void mastermind::scenarioOne()
 
     cout << "Scenario #1" << endl;
     cout << RED << "Let's" << WHITE << " say you guess: y p p p or equivalently: " << stringToColor("yppp") << WHITE << endl;
-    cout << "Where the secret code is: " << stringToColor("ybgr") << WHITE << endl;
+    cout << "Where the secret code is: " << stringToColor("ybgr") << WHITE << endl
+         << endl;
 
     cout << "You have guessed " << YELLOW << "1 color" << WHITE << " in the correct position and ";
     cout << YELLOW << "3 colors" << WHITE << " you guessed are NOT in the secret code." << endl;
@@ -80,7 +82,7 @@ void mastermind::scenarioOne()
     cout << endl;
     cout << endl;
 
-    cout << RED << "Note: " << WHITE << " Order of result isn't correlated to order of color, however these are both equivalent: " << endl;
+    cout << RED << "Note: " << WHITE << "Order of result isn't correlated to order of color, so these are both equivalent: " << endl;
     cout << endl;
 
     chooser = rand() % 3;
@@ -109,10 +111,11 @@ void mastermind::scenarioTwo()
 
     cout << "Scenario #2" << endl;
     cout << RED << "Let's" << WHITE << " say you guess: y p p p or equivalently: " << stringToColor("yppp") << WHITE << endl;
-    cout << "Where the secret code is: " << stringToColor("bygr") << WHITE << endl;
+    cout << "Where the secret code is: " << stringToColor("bygr") << WHITE << endl
+         << endl;
 
     cout << "You have guessed " << YELLOW << "1 color" << WHITE << " right but it's in the wrong position and ";
-    cout << YELLOW << "3 colors" << WHITE << " you guessed again are NOT in the secret code." << endl;
+    cout << YELLOW << "3 colors" << WHITE << " you guessed are NOT in the secret code." << endl;
 
     cout << "You would see a result like the following: ";
     cout << endl;
@@ -122,7 +125,7 @@ void mastermind::scenarioTwo()
     cout << endl;
     cout << endl;
 
-    cout << RED << "Note: " << WHITE << " Order of result isn't correlated to order of color, however these are both equivalent: " << endl;
+    cout << RED << "Note: " << WHITE << "Order of result isn't correlated to order of color, so these are both equivalent: " << endl;
     cout << endl;
 
     chooser = rand() % 3;
@@ -152,7 +155,8 @@ void mastermind::scenarioThree()
 
     cout << "Scenario #3" << endl;
     cout << RED << "Let's" << WHITE << " say you guess: b p y r or equivalently: " << stringToColor("bpyr") << WHITE << endl;
-    cout << "Where the secret code is: " << stringToColor("bygr") << WHITE << endl;
+    cout << "Where the secret code is: " << stringToColor("bygr") << WHITE << endl
+         << endl;
 
     cout << "You have guessed " << YELLOW << "2 colors" << WHITE << " in the right position and ";
     cout << YELLOW << "1 color" << WHITE << " is NOT in the secret code and ";
@@ -168,7 +172,7 @@ void mastermind::scenarioThree()
         cout << endl;
         cout << endl;
 
-        cout << RED << "Note: " << WHITE << " Order of result isn't correlated to order of color, however these are both equivalent: " << endl;
+        cout << RED << "Note: " << WHITE << "Order of result isn't correlated to order of color, so these are both equivalent: " << endl;
         cout << endl;
         chooser = rand() % 3;
         displayResult(1, 2, 1, 0, 4, chooser);
@@ -178,8 +182,9 @@ void mastermind::scenarioThree()
     {
         return scenarioThree();
     }
-
+    cout << endl;
     cout << WHITE << "Now you should be ready to play mastermind. Thank You." << endl;
+    cout << endl;
     //Have a function call to the menu
 }
 
@@ -334,13 +339,13 @@ string mastermind::authenticateGuess(int totalColors)
     //Filer longer input than string also having valid colors in string
     while ((!checkValidColors(userGuess)) || (userGuess.size() != totalColors))
     {
-        cout << "Sorry that was an invalid input. " << RED << "Try again." << endl;
+        cout << "Sorry, that's a invalid input. " << RED << "Try again." << endl;
         cout << WHITE << "What do you think the secret is : ";
         cin >> userGuess;
         cout << endl;
     }
 
-    cout << "Your choice: " << stringToColor(userGuess);
+    cout << "Your choice: " << stringToColor(userGuess) << endl;
     cout << WHITE << "Are you comfortable with this choice? (y/n) : ";
     char rsp;
     cin >> rsp;
@@ -354,21 +359,55 @@ string mastermind::authenticateGuess(int totalColors)
         string tmp = authenticateGuess(totalColors);
     }
 }
+//store userGuess, triesLeft, whatoutput was chose
+void mastermind::displayFeedback(int totalColors)
+{
+    for (int i = 0; i < myPieces.size(); ++i)
+    {
+        cout << " +--------------------------------+" << endl;
+        cout << " +" << setw(5) << " Choice: " << myPieces[i].userGuess << setw(2) << " -> " << setw(6) << stringToColor(myPieces[i].userGuess) << WHITE << endl;
+        displayResult(myPieces[i].notinSecret, myPieces[i].correctlyPlaced, myPieces[i].incorrectlyPlaced, 0, totalColors, myPieces[i].chosenOutput);
+        cout << endl;
+        cout << WHITE << " +" << setw(5) << " Tries Left: " << myPieces[i].tries << endl;
+        cout << WHITE << " +--------------------------------+" << endl;
+    }
+}
 //Goals:
 //1 : Mkae a display for guessed color and result  in colors
 //2 : Keep on adding guesses visually pleasing
 void mastermind::aiPlay(int totalColors)
 {
-    int start = 0;
+    int chooser;
+    int tries = 1;
+    int maxTries = 10;
     string secretCode = generateSecret(totalColors); // Ai Chosen Guess
     string userGuess;                                // Storing user guesses
 
-    userGuess = authenticateGuess(totalColors);
-    //while (start < attempts)
-    ///{
-    //     cout << start << endl;
-    //     start++;
-    //}
+    while (tries <= maxTries)
+    {
+        chooser = rand() % 3; // changes what output you might see to make it hard to find a pattern
+
+        userGuess = authenticateGuess(totalColors);
+        playerChose playerInstance = setPlayerInstace(userGuess, maxTries - tries, chooser);
+        myPieces.push_back(playerInstance);
+        // call display feedback on everything in the vector
+        displayFeedback(totalColors);
+        tries++;
+    }
+}
+
+playerChose mastermind::setPlayerInstace(string userGuess, int tries, int chooser)
+{
+    playerChose event;
+    event.userGuess = userGuess;
+    event.chosenOutput = chooser;
+
+    event.correctlyPlaced = 2;
+    event.notinSecret = 1;
+    event.incorrectlyPlaced = 1;
+
+    event.tries = tries;
+    return event;
 }
 string mastermind::generateSecret(int totalColors)
 {
@@ -383,6 +422,7 @@ string mastermind::generateSecret(int totalColors)
     cout << "secret code is " << secretCode << endl;
     // cout << "attempts" << attempts << endl;
     stringToColor(secretCode);
+    cout << endl;
     return secretCode;
 }
 
@@ -419,6 +459,6 @@ string mastermind::stringToColor(string password)
             break;
         }
     }
-    cout << endl;
+    //cout << endl;
     return "";
 }
