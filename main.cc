@@ -17,7 +17,7 @@ int main()
      int choice;
      while (choice != 4)
      {
-          cout << WHITE << "Mastermind : " << obj.stringToColor(matcher);
+          cout << WHITE << "Mastermind : " << obj.stringToColor(matcher) << endl;
           cout << RED << "1 - Tutorial for Mastermind." << endl;
           cout << BLUE << "2 - Human v AI." << endl;
           cout << PINK << "3 - Donald Knuth AI." << endl;
