@@ -1,10 +1,12 @@
 #include <iostream>
+#include <vector>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <iomanip> // std::setw
 #include <ctype.h>
 #include "colors.h"
-#include "piece.h"
+#include "playersChose.h"
 
 using namespace std;
 
@@ -25,6 +27,8 @@ public:
     string stringToColor(string password);
     string authenticateGuess(int totalColors);
     bool checkValidColors(string userGuess);
+    void displayFeedback(int totalColors);
+    playerChose setPlayerInstace(string userGuess, int tries, int chooser);
 
     //Random Sequences
     void displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize, int choose);
@@ -39,6 +43,7 @@ public:
 private:
     int attempts;
     char colors[7];
+    vector<playerChose> myPieces;
     // string password;
     //piece password;
 };
