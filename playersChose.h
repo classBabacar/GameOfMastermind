@@ -14,3 +14,11 @@ struct playerChose
     int correctlyPlaced;
     int incorrectlyPlaced;
 };
+
+// A struct to store results relative of the user
+struct getResults
+{
+    int notinSecret;
+    int correctlyPlaced;
+    int incorrectlyPlaced;
+};
