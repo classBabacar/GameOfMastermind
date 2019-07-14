@@ -4,23 +4,21 @@
 
 using namespace std;
 
-// void stringToColor(string matcher);
-
 int main()
 {
      srand(time(NULL));
 
      mastermind obj;
      string matcher = "rgbywcp";
-
-     cout << "GAME NOT COMPLETE YET!!!!" << endl;
      int choice;
+
+     cout << endl;
      while (choice != 4)
      {
           cout << WHITE << "Mastermind : " << obj.stringToColor(matcher) << endl;
           cout << RED << "1 - Tutorial for Mastermind." << endl;
           cout << BLUE << "2 - Human v AI." << endl;
-          cout << PINK << "3 - Donald Knuth AI." << endl;
+          cout << PINK << "3 - Donald Knuth AI. (Not implemented yet)" << endl;
           cout << YELLOW << "4 - Exit." << endl;
           cout << WHITE << "Enter your choice : ";
           cin >> choice;
@@ -32,20 +30,16 @@ int main()
                obj.differentColorsTutorial();
                break;
           case 2:
-               obj.aiPlay(4); // Right now im going to hard code this number but change it eventually
+               cout << "How many pegs would you like to play with (Recommendation : 4)? : ";
+               int pegs;
+               cin >> pegs;
+               obj.aiPlay(pegs);
                break;
 
+          case 4:
+               cout << "Thank you for playing the game" << endl;
           default:
                break;
           }
      }
-     /*cout << WHITE << "Welcome to " << YELLOW << "Mastermind!!!" << endl;
-    cout << WHITE << endl;*/
-     // cout << endl;
-     // cout << "----------" << endl;
-     // cout << "+ " << GREEN << " O " << GREEN << " O " << WHITE << " + " << endl;
-     // cout << "+ " << GREEN << " O " << WHITE << " O " << WHITE << " + " << endl;
-     // cout << "----------" << endl;
-     // cout << endl;
-     //cout << WHITE << "hi" << endl;*/
 }
