@@ -9,6 +9,7 @@ mastermind::mastermind()
         colors[i] = availableColors[i];
     }
 }
+
 void mastermind::differentColorsTutorial()
 {
     cout << "There are 7 different colors " << endl;
@@ -35,7 +36,11 @@ void mastermind::differentColorsTutorial()
         differentColorsTutorial();
     }
 }
-//uh
+
+//************************************************************************
+// Function: userGuideline()
+// Purpose:  Explaining game
+//************************************************************************
 void mastermind::userGuideline()
 {
     cout << YELLOW << "The idea to this game is to guess a secret code of 4 or more colors in a limited number of rounds." << endl;
@@ -61,6 +66,10 @@ void mastermind::userGuideline()
     }
 }
 
+//************************************************************************
+// Function: scenarioOne()
+// Purpose:  A given game scenario of the game to help teach
+//************************************************************************
 void mastermind::scenarioOne()
 {
     cout << endl;
@@ -104,6 +113,11 @@ void mastermind::scenarioOne()
         scenarioOne();
     }
 }
+
+//************************************************************************
+// Function: scenarioTwo()
+// Purpose:  A given game scenario of the game to help teach
+//************************************************************************
 void mastermind::scenarioTwo()
 {
     cout << endl;
@@ -148,6 +162,10 @@ void mastermind::scenarioTwo()
     }
 }
 
+//************************************************************************
+// Function: scenarioThree()
+// Purpose:  A given game scenario of the game to help teach
+//************************************************************************
 void mastermind::scenarioThree()
 {
     cout << endl;
@@ -188,13 +206,19 @@ void mastermind::scenarioThree()
     //Have a function call to the menu
 }
 
-void mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize, int chooser)
+//************************************************************************
+// Function: displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize, int chooser)
+// Purpose:  This function choose 1 of 3 output sequences that are left to random.
+//           1. This helps with users trying to read game patterns that I set through algorithms
+//           2. A user playing the game can't try to edge on the game
+//************************************************************************
+void mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize, int randomizer)
 {
-    if (chooser == 0)
+    if (randomizer == 0)
     {
         resultPatternOne(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, colorSize);
     }
-    else if (chooser == 1)
+    else if (randomizer == 1)
     {
         resultPatternTwo(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, colorSize);
     }
@@ -203,6 +227,8 @@ void mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorre
         resultPatternThree(notInSecret, correctlyPlaced, incorrectlyPlaced, counter, colorSize);
     }
 }
+
+//Output #1
 void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
     if (counter % 2 == 0)
@@ -237,6 +263,7 @@ void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int inco
     }
 }
 
+//Output #2
 void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
     if (counter % 2 == 0)
@@ -271,6 +298,7 @@ void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int inco
     }
 }
 
+//Output #3
 void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
     if (counter % 2 == 0)
@@ -305,7 +333,10 @@ void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int in
     }
 }
 
-//Making sure the string has valid colors
+//************************************************************************
+// Function: checkValidColors(string userGuess)
+// Purpose:  Making sure the user guess consists of only valid colors
+//************************************************************************
 bool mastermind::checkValidColors(string userGuess)
 {
     int totalColors = 7;
@@ -328,17 +359,21 @@ bool mastermind::checkValidColors(string userGuess)
     return true;
 }
 
-//Parsing the users guess to make sure it doesnt debunk
+//************************************************************************
+// Function: authenticateGuess(int totalColors)
+// Purpose:  The user input packaged that also verifies if their guess is legal
+//************************************************************************
 string mastermind::authenticateGuess(int totalColors)
 {
+    helpUserSeeColors(totalColors);
     cout << WHITE << "What do you think the secret is : ";
     string userGuess;
     cin >> userGuess;
 
     cout << endl;
-    //Filer longer input than string also having valid colors in string
     while ((!checkValidColors(userGuess)) || (userGuess.size() != totalColors))
     {
+        helpUserSeeColors(totalColors);
         cout << "Sorry, that's a invalid input. " << RED << "Try again." << endl;
         cout << WHITE << "What do you think the secret is : ";
         cin >> userGuess;
@@ -359,7 +394,11 @@ string mastermind::authenticateGuess(int totalColors)
         string tmp = authenticateGuess(totalColors);
     }
 }
-//store userGuess, triesLeft, whatoutput was chose
+
+//************************************************************************
+// Function: displayFeedback(int totalColors)
+// Purpose:  Displaying all of the users previous guesses
+//************************************************************************
 void mastermind::displayFeedback(int totalColors)
 {
     for (int i = 0; i < myPieces.size(); ++i)
@@ -372,43 +411,175 @@ void mastermind::displayFeedback(int totalColors)
         cout << WHITE << " +--------------------------------+" << endl;
     }
 }
-//Goals:
-//1 : Mkae a display for guessed color and result  in colors
-//2 : Keep on adding guesses visually pleasing
+
+//************************************************************************
+// Function: helpUserSeeColors()
+// Purpose:  To help the user remember all the available colors to choose from
+//************************************************************************
+void mastermind::helpUserSeeColors(int totalColors)
+{
+    cout << endl;
+    cout << "You must choose " << totalColors << " colors" << endl;
+    cout << "---------------------------" << endl;
+    cout << RED << "(r) ";
+    cout << GREEN << "(g) ";
+    cout << BLUE << "(b) ";
+    cout << YELLOW << "(y) ";
+    cout << WHITE << "(w) ";
+    cout << PINK << "(p) ";
+    cout << CYAN << "(c) ";
+    cout << WHITE << endl;
+    cout << endl;
+}
+
+//************************************************************************
+// Function: whoMessage(char isWho)
+// Purpose:  Function to return a winner or loser message
+//************************************************************************
+string mastermind::whoMessage(char isWho)
+{
+    string rsp;
+    if (isWho == 'w')
+    {
+        rsp = "Congrats you guessed the secret correctly.\n";
+    }
+    else
+    {
+        rsp = "Sorry, you lose...keep on trying";
+    }
+
+    return rsp;
+}
+
+//************************************************************************
+// Function: aiPlay(int totalColors)
+// Purpose:  Game Loop
+//************************************************************************
 void mastermind::aiPlay(int totalColors)
 {
-    int chooser;
+    int randomizer;
     int tries = 1;
-    int maxTries = 10;
+    bool gameOver = false;
+
     string secretCode = generateSecret(totalColors); // Ai Chosen Guess
-    string userGuess;                                // Storing user guesses
+    string userGuess;
 
-    while (tries <= maxTries)
+    while (tries <= attempts && gameOver == false)
     {
-        chooser = rand() % 3; // changes what output you might see to make it hard to find a pattern
-
+        randomizer = rand() % 3;
         userGuess = authenticateGuess(totalColors);
-        playerChose playerInstance = setPlayerInstace(userGuess, maxTries - tries, chooser);
-        myPieces.push_back(playerInstance);
-        // call display feedback on everything in the vector
-        displayFeedback(totalColors);
-        tries++;
+
+        if (userGuess == secretCode)
+        {
+            cout << BLUE << whoMessage('w') << WHITE << endl;
+            gameOver = true;
+        }
+        else
+        {
+            playerChose playerInstance = setPlayerInstance(userGuess, secretCode, attempts - tries, randomizer);
+            myPieces.push_back(playerInstance);
+            displayFeedback(totalColors);
+            tries++;
+        }
+    }
+    if (gameOver == false)
+    {
+        cout << RED << whoMessage('l') << WHITE << endl;
+        cout << "The secret code was : " << secretCode << " -> " << stringToColor(secretCode) << endl;
+        cout << endl;
     }
 }
 
-playerChose mastermind::setPlayerInstace(string userGuess, int tries, int chooser)
+//************************************************************************
+// Function: checkSet(int wordLocation, set<int> coordinateSet)
+// Purpose:  Making sure that no 2 coordinates are used because the game only allows unique sets
+//************************************************************************
+bool mastermind::checkSet(int wordLocation, set<int> coordinateSet)
+{
+    set<int>::iterator it;
+    for (it = coordinateSet.begin(); it != coordinateSet.end(); it++)
+    {
+        if (wordLocation == *it)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+//************************************************************************
+// Function: resultAlgorithm(string userGuess, string secretCode, int totalColors)
+// Purpose:  Algorithm to determine how many correctly,incorrecly placed pegs and the ones that arent in at all
+//************************************************************************
+getResults mastermind::resultAlgorithm(string userGuess, string secretCode, int totalColors)
+{
+    //Set to store coordinates of a letter in a string to eliminate repetitive colors
+    set<int> repeatedUserPosition;
+    set<int> repeatedSecretPosition;
+
+    int samePosition = 0; // In the secret code and correct position
+    for (int i = 0; i < totalColors; ++i)
+    {
+        if (userGuess[i] == secretCode[i])
+        {
+            samePosition++;
+            repeatedUserPosition.insert(i);
+            repeatedSecretPosition.insert(i);
+        }
+    }
+
+    int wrongPosition = 0; // In the secret code but wrong position
+    int notinKey = 0;      // Not in the secret code at all
+
+    for (int i = 0; i < userGuess.size(); i++)
+    {
+        char capture = userGuess[i];
+        for (int j = 0; j < secretCode.size(); ++j)
+        {
+            if ((capture == secretCode[j]) && checkSet(i, repeatedUserPosition) && checkSet(j, repeatedSecretPosition))
+            {
+                repeatedUserPosition.insert(i);
+                repeatedSecretPosition.insert(j);
+                wrongPosition++;
+            }
+        }
+    }
+
+    //Returning the struct
+    getResults player;
+    player.correctlyPlaced = samePosition;
+    player.incorrectlyPlaced = wrongPosition;
+
+    // By process of deduction, if color is not in the same position or wrong position then we can say it's not in the code.
+    player.notinSecret = totalColors - samePosition - wrongPosition;
+    return player;
+}
+
+//************************************************************************
+// Function: setPlayerInstance(string userGuess, string secretCode, int tries, int chooser)
+// Purpose:  A struct that packages all the info of a user such as : guess, tries left, and info about pegs
+//************************************************************************
+playerChose mastermind::setPlayerInstance(string userGuess, string secretCode, int tries, int randomizer)
 {
     playerChose event;
     event.userGuess = userGuess;
-    event.chosenOutput = chooser;
+    event.chosenOutput = randomizer;
 
-    event.correctlyPlaced = 2;
-    event.notinSecret = 1;
-    event.incorrectlyPlaced = 1;
+    int totalColors = userGuess.size();
+    getResults player = resultAlgorithm(userGuess, secretCode, totalColors);
 
+    event.correctlyPlaced = player.correctlyPlaced;
+    event.notinSecret = player.notinSecret;
+    event.incorrectlyPlaced = player.incorrectlyPlaced;
     event.tries = tries;
+
     return event;
 }
+
+//************************************************************************
+// Function: generateSecret(int totalColors)
+// Purpose:  Randomly choose a secretCode
+//************************************************************************
 string mastermind::generateSecret(int totalColors)
 {
     string secretCode;
@@ -419,16 +590,15 @@ string mastermind::generateSecret(int totalColors)
         random = rand() % 7;
         secretCode += colors[random];
     }
-    cout << "secret code is " << secretCode << endl;
-    // cout << "attempts" << attempts << endl;
-    stringToColor(secretCode);
-    cout << endl;
     return secretCode;
 }
 
+//************************************************************************
+// Function: stringToColor(string password)
+// Purpose:  Displaying colored pegs
+//************************************************************************
 string mastermind::stringToColor(string password)
 {
-
     for (int i = 0; i < password.length(); ++i)
     {
         char holder = password[i];
@@ -459,6 +629,5 @@ string mastermind::stringToColor(string password)
             break;
         }
     }
-    //cout << endl;
     return "";
 }
