@@ -1,9 +1,14 @@
 
 # Inspiration
-Donald Knuth noted in the past that the game called mastermind, can be solved in N amount of rounds. I plan to program this game and apply his algorithm through the use of an AI agent or have a series of steps so the user can try.
+- In 1977, Donald Knuth implementend an algorithm to solve the game, Mastermind. The algorithm says you can solve a pattern in 5 or fewer moves granted if the set of pegs = 4. I've played the game before and thought it was very interesting so I decided to make the game and apply his algorithm to it and see what I can learn.
+https://en.wikipedia.org/wiki/Mastermind_(board_game)
+
 
 # Tutorial Phase (6/22/19 - Complete)
 - The game at first can be a little tricky and I want the people to understand how it's played. So if you've never played mastermind go through the tutorial I hope I explained it well.
+
+# Human v AI (** 7/14/2019 **)
+- The human v AI aspect is complete. This part is primarly where the AI generates a secret code and you the user have to guess it. I played a lot of games and its interesting how to go about solving a secret pattern with 7 different colors. When I re-implement Donald Knuths Algorithm I will try to be a bit more creative and insert my approach when I have an AI guess a users secret word.
 
 # Update
 - **6/29/2019** Menu added and way to generate a random color, I'm most likely going to use a struct to minimize the game and make it easier to handle.
