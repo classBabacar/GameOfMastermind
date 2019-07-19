@@ -5,17 +5,17 @@ https://en.wikipedia.org/wiki/Mastermind_(board_game)
 
 
 # Tutorial Phase (6/22/19)
-- The game at first can be a little tricky and I want the people to understand how it's played. So if you've never played mastermind go through the tutorial, I hope I explained it well.
+- The game at first can be a little tricky and I want the people to understand how it's played. So if you've never played mastermind go through the tutorial I hope I explained it well.
 
 # Human v AI (7/14/2019)
-- The human v. AI aspect is complete. This part is primarly where the AI generates a secret code and you the user have to guess it. I've played this a lot and it's interesting on how you go about solving a secret pattern with 4-pegs compared to 7, there are a lot of tactics. When I re-implement Donald Knuth's Algorithm I will try to be a bit more creative and insert my approach when I have an AI guess a users secret word.
+- The human v AI aspect is complete. This part is primarly where the AI generates a secret code and you the user have to guess it. I played a lot of rounds and it's very interesting on how you can go about solving a secret pattern with 4 pegs compared to 7. When I re-implement Donald Knuth's Algorithm I will try to be a bit more creative and insert my approach when I have an AI guess a users secret word.
 
 # Update
 - **6/29/2019** Menu added and way to generate a random color, I'm most likely going to use a struct to minimize the game and make it easier to handle.
 
 - **7/4/2019** Added a authentication system to make sure the game wouldn't debunk at random spots now all that is left is the results algorithm and I'm thinking of a way to make the game appealing in the results stage.
 
-- **7/6/2019** Structs are GREAT!!! It makes the code packagable and it helps with readibility I think.
+- **7/6/2019** Structs are GREAT!!! It makes the code packagable and it helps with readibility.
 
 # Running Code
 
