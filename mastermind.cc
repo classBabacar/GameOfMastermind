@@ -374,7 +374,7 @@ string mastermind::authenticateGuess(int totalColors)
     while ((!checkValidColors(userGuess)) || (userGuess.size() != totalColors))
     {
         helpUserSeeColors(totalColors);
-        cout << "Sorry, that's a invalid input. " << RED << "Try again." << endl;
+        cout << "Sorry, that's an invalid input. " << RED << "Try again." << endl;
         cout << WHITE << "What do you think the secret is : ";
         cin >> userGuess;
         cout << endl;
