@@ -30,11 +30,12 @@ public:
     bool checkValidColors(string userGuess);
     void displayFeedback(int totalColors);
     void helpUserSeeColors(int totalColors);
+    void setDisplay(int &counter,int colorSize);
 
     // Struct-User Specific Functions
     playerChose setPlayerInstance(string userGuess, string secretCode, int tries, int randomizer);
     getResults resultAlgorithm(string userGuess, string secretCode, int totalColors);
-    string whoMessage(char isWho);
+    string resultMessage(char isWho);
     bool checkSet(int wordLocation, set<int> coordinateSet);
 
     //Random Sequences
