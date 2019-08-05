@@ -203,7 +203,6 @@ void mastermind::scenarioThree()
     cout << endl;
     cout << WHITE << "Now you should be ready to play mastermind. Thank You." << endl;
     cout << endl;
-    //Have a function call to the menu
 }
 
 //************************************************************************
@@ -228,9 +227,11 @@ void mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorre
     }
 }
 
-//Output #1
-void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
-{
+//************************************************************************
+// Function: equalDisplay(counter by reference, total number of pegs used )
+// Purpose:  Function to display the results in a normal fashion
+//************************************************************************
+void mastermind::setDisplay(int &counter, int colorSize){
     if (counter % 2 == 0)
     {
         cout << BLUE << " + ";
@@ -245,8 +246,13 @@ void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int inco
             counter = 0;
         }
     }
+}
 
-    if (notInSecret > 0) //
+//Output #1
+void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
+{
+    setDisplay(counter,colorSize);
+    if (notInSecret > 0) 
     {
         cout << WHITE << " O ";
         return resultPatternOne(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, colorSize - 1);
@@ -266,21 +272,7 @@ void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int inco
 //Output #2
 void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
-    if (counter % 2 == 0)
-    {
-        cout << BLUE << " + ";
-        if (counter >= 2)
-        {
-            if (colorSize == 0)
-            {
-                return;
-            }
-            cout << endl;
-            cout << BLUE << " + ";
-            counter = 0;
-        }
-    }
-
+    setDisplay(counter,colorSize);
     if (correctlyPlaced > 0)
     {
         cout << GREEN << " O ";
@@ -291,7 +283,7 @@ void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int inco
         cout << RED << " O ";
         return resultPatternTwo(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, colorSize - 1);
     }
-    else if (notInSecret > 0) //
+    else if (notInSecret > 0)
     {
         cout << WHITE << " O ";
         return resultPatternTwo(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, colorSize - 1);
@@ -301,27 +293,13 @@ void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int inco
 //Output #3
 void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
-    if (counter % 2 == 0)
-    {
-        cout << BLUE << " + ";
-        if (counter >= 2)
-        {
-            if (colorSize == 0)
-            {
-                return;
-            }
-            cout << endl;
-            cout << BLUE << " + ";
-            counter = 0;
-        }
-    }
-
+    setDisplay(counter,colorSize);
     if (incorrectlyPlaced > 0)
     {
         cout << RED << " O ";
         return resultPatternThree(notInSecret, correctlyPlaced, incorrectlyPlaced - 1, counter + 1, colorSize - 1);
     }
-    else if (notInSecret > 0) //
+    else if (notInSecret > 0)
     {
         cout << WHITE << " O ";
         return resultPatternThree(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, colorSize - 1);
@@ -391,7 +369,7 @@ string mastermind::authenticateGuess(int totalColors)
     }
     else
     {
-        string tmp = authenticateGuess(totalColors);
+       return authenticateGuess(totalColors);
     }
 }
 
@@ -436,7 +414,7 @@ void mastermind::helpUserSeeColors(int totalColors)
 // Function: whoMessage(char isWho)
 // Purpose:  Function to return a winner or loser message
 //************************************************************************
-string mastermind::whoMessage(char isWho)
+string mastermind::resultMessage(char isWho)
 {
     string rsp;
     if (isWho == 'w')
@@ -471,7 +449,7 @@ void mastermind::aiPlay(int totalColors)
 
         if (userGuess == secretCode)
         {
-            cout << BLUE << whoMessage('w') << WHITE << endl;
+            cout << BLUE << resultMessage('w') << WHITE << endl;
             gameOver = true;
         }
         else
@@ -484,7 +462,7 @@ void mastermind::aiPlay(int totalColors)
     }
     if (gameOver == false)
     {
-        cout << RED << whoMessage('l') << WHITE << endl;
+        cout << RED << resultMessage('l') << WHITE << endl;
         cout << "The secret code was : " << secretCode << " -> " << stringToColor(secretCode) << endl;
         cout << endl;
     }
