@@ -11,7 +11,7 @@ https://en.wikipedia.org/wiki/Mastermind_(board_game)
 # Human v AI (7/14/2019)
 - The human v AI aspect is complete. This part is primarly where the AI generates a secret code and you the user have to guess it. I played a lot of rounds and it's very interesting on how you can go about solving a secret pattern with 4 pegs compared to 7. When I re-implement Donald Knuth's Algorithm I will try to be a bit more creative and insert my approach when I have an AI guess a users secret word.
 
-# Swaszek's algorithm (8/5/2019)
+# Swaszek's Algorithm (8/5/2019)
 1. You the user have to think of a color pattern ideally with 4 pegs (repitions or not)...example (rgby -> red green blue yellow). I was thinking to have the user enter the secret code but some people wouldn't believe so it's best to keep it in your mind haha.
 2. Instead of the AI giving you feedback (Human V. AI), the game is reversed so for each round the AI will ask for it's black and white peg total.
 
