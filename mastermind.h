@@ -30,7 +30,8 @@ public:
     bool checkValidColors(string userGuess);
     void displayFeedback(int totalColors);
     void helpUserSeeColors(int totalColors);
-    void setDisplay(int &counter,int colorSize);
+    void setDisplay(int &counter, int colorSize);
+    void resetAll();
 
     // Struct-User Specific Functions
     playerChose setPlayerInstance(string userGuess, string secretCode, int tries, int randomizer);
@@ -47,9 +48,14 @@ public:
     //AI functionality
     void aiPlay(int totalColors);
     string generateSecret(int totalColors);
+    void permutate(int k, string emptyString);
+    void swaszekAlgorithm();
+    void cleanUp(vector<string> &aVec);
+    void getswaszekResults(int totalPegs, int &blackPegs, int &whitePegs, int numOfTurns, string guess);
 
 private:
     int attempts;
-    char colors[7];
+    vector<char> colors;
+    vector<string> permutations;
     vector<playerChose> myPieces;
 };
