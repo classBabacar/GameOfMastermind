@@ -622,10 +622,10 @@ void mastermind::swaszekAlgorithm()
 
     while (blackPegs != totalPegs && maxTurns >= 0)
     {
-        cout << endl;
         aiGuess = permutations[0];
         if (aiGuess != "99")
-        {
+        {   
+            cout << endl;
             getswaszekResults(totalPegs, blackPegs, whitePegs, numOfTurns, aiGuess);
             numOfTurns++;
             maxTurns--;
