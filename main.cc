@@ -18,8 +18,8 @@ int main()
           cout << WHITE << "Mastermind : " << obj.stringToColor(matcher) << endl;
           cout << RED << "1 - Tutorial for Mastermind." << endl;
           cout << BLUE << "2 - Human v AI." << endl;
-          cout << PINK << "3 - Donald Knuth AI. (Not implemented yet)" << endl;
-          cout << GREEN << "4 - Swaszek's Algorithm " << endl;
+          cout << PINK << "3 - Donald Knuth's Algorithm. (Not implemented yet)" << endl;
+          cout << GREEN << "4 - Swaszek's Algorithm. " << endl;
           cout << YELLOW << "5 - Exit." << endl;
           cout << WHITE << "Enter your choice : ";
           cin >> choice;
