@@ -6,7 +6,7 @@ mastermind::mastermind()
     char availableColors[] = {'r', 'g', 'b', 'y', 'w', 'p', 'c'};
     for (int i = 0; i < 7; ++i)
     {
-        colors[i] = availableColors[i];
+        colors.push_back(availableColors[i]);
     }
 }
 
@@ -231,7 +231,8 @@ void mastermind::displayResult(int notInSecret, int correctlyPlaced, int incorre
 // Function: equalDisplay(counter by reference, total number of pegs used )
 // Purpose:  Function to display the results in a normal fashion
 //************************************************************************
-void mastermind::setDisplay(int &counter, int colorSize){
+void mastermind::setDisplay(int &counter, int colorSize)
+{
     if (counter % 2 == 0)
     {
         cout << BLUE << " + ";
@@ -251,8 +252,8 @@ void mastermind::setDisplay(int &counter, int colorSize){
 //Output #1
 void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
-    setDisplay(counter,colorSize);
-    if (notInSecret > 0) 
+    setDisplay(counter, colorSize);
+    if (notInSecret > 0)
     {
         cout << WHITE << " O ";
         return resultPatternOne(notInSecret - 1, correctlyPlaced, incorrectlyPlaced, counter + 1, colorSize - 1);
@@ -272,7 +273,7 @@ void mastermind::resultPatternOne(int notInSecret, int correctlyPlaced, int inco
 //Output #2
 void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
-    setDisplay(counter,colorSize);
+    setDisplay(counter, colorSize);
     if (correctlyPlaced > 0)
     {
         cout << GREEN << " O ";
@@ -293,7 +294,7 @@ void mastermind::resultPatternTwo(int notInSecret, int correctlyPlaced, int inco
 //Output #3
 void mastermind::resultPatternThree(int notInSecret, int correctlyPlaced, int incorrectlyPlaced, int counter, int colorSize)
 {
-    setDisplay(counter,colorSize);
+    setDisplay(counter, colorSize);
     if (incorrectlyPlaced > 0)
     {
         cout << RED << " O ";
@@ -369,7 +370,7 @@ string mastermind::authenticateGuess(int totalColors)
     }
     else
     {
-       return authenticateGuess(totalColors);
+        return authenticateGuess(totalColors);
     }
 }
 
@@ -466,6 +467,7 @@ void mastermind::aiPlay(int totalColors)
         cout << "The secret code was : " << secretCode << " -> " << stringToColor(secretCode) << endl;
         cout << endl;
     }
+    resetAll();
 }
 
 //************************************************************************
@@ -552,6 +554,119 @@ playerChose mastermind::setPlayerInstance(string userGuess, string secretCode, i
     event.tries = tries;
 
     return event;
+}
+
+//************************************************************************
+// Function: cleanUp(vector<string> &aVec)
+// Purpose:  A cleaning mechanism to reduce the S(all possible codes)
+//************************************************************************
+void mastermind::cleanUp(vector<string> &aVec)
+{
+    vector<string>::iterator it = aVec.begin();
+    while (it != aVec.end())
+    {
+        if (*it == "99")
+        {
+            it = aVec.erase(it);
+        }
+        else
+            it++;
+    }
+}
+
+//************************************************************************
+// Function: getswaszekResults(int totalPegs, # of blackPegs, # of whitePegs, # turn counter, aiGuess )
+// Purpose:  packaging and making the Ai results scalable
+//************************************************************************
+void mastermind::getswaszekResults(int totalPegs, int &blackPegs, int &whitePegs, int numOfTurns, string aiGuess)
+{
+    cout << YELLOW << "Possible Choices Left: " << WHITE << permutations.size() << endl;
+    cout << "AI Guess #" << numOfTurns << ": " << aiGuess << " -> " << stringToColor(aiGuess) << endl;
+
+    cout << WHITE;
+
+    cout << YELLOW << "Black Pegs (Colors with matching position): ";
+    cin >> blackPegs;
+
+    cout << YELLOW << "White Pegs (Colors in your code but incorrect position): ";
+    cin >> whitePegs;
+
+    for (int i = 0; i < permutations.size(); ++i)
+    {
+        getResults player = resultAlgorithm(permutations[i], aiGuess, totalPegs);
+        if ((player.correctlyPlaced != blackPegs) || (player.incorrectlyPlaced != whitePegs))
+        {
+            permutations[i] = "99";
+        }
+    }
+    cleanUp(permutations);
+}
+
+//************************************************************************
+// Function: swaszekAlgorithm()
+// Purpose:  This is swaszek's algorithm
+//************************************************************************
+void mastermind::swaszekAlgorithm()
+{
+    int totalPegs = 4;
+    permutate(totalPegs, "");
+
+    int blackPegs = 0;
+    int whitePegs = 0;
+    int numOfTurns = 0;
+    int maxTurns = 4;
+
+    string aiGuess = "rrgg";
+    getswaszekResults(totalPegs, blackPegs, whitePegs, numOfTurns, aiGuess);
+    numOfTurns++;
+
+    while (blackPegs != totalPegs && maxTurns >= 0)
+    {
+        cout << endl;
+        aiGuess = permutations[0];
+        if (aiGuess != "99")
+        {
+            getswaszekResults(totalPegs, blackPegs, whitePegs, numOfTurns, aiGuess);
+            numOfTurns++;
+            maxTurns--;
+        }
+        else
+            maxTurns = -1;
+    }
+    cout << endl;
+    if (blackPegs == totalPegs)
+    {
+        cout << YELLOW << "The AI won!!! - Your secret code was : " << stringToColor(aiGuess) << WHITE << endl;
+    }
+    else
+    {
+        cout << "Are you sure that you entered correct reponses? Try Again." << endl;
+    }
+    resetAll();
+}
+
+//resetting everything back to default
+void mastermind::resetAll()
+{
+    permutations.clear();
+    myPieces.clear();
+}
+
+//************************************************************************
+// Function: permutate(how many groupings do I want in a permutation, string emptyString)
+// Purpose:  Finding alll the permuations of the colors
+//************************************************************************
+void mastermind::permutate(int k, string emptyString)
+{
+    if (k == 0)
+    {
+        permutations.push_back(emptyString);
+        return;
+    }
+    for (int i = 0; i < colors.size(); ++i)
+    {
+        permutate(k - 1, emptyString + colors[i]);
+    }
 }
 
 //************************************************************************
