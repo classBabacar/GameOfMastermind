@@ -13,13 +13,14 @@ int main()
      int choice;
 
      cout << endl;
-     while (choice != 4)
+     while (choice != 5)
      {
           cout << WHITE << "Mastermind : " << obj.stringToColor(matcher) << endl;
           cout << RED << "1 - Tutorial for Mastermind." << endl;
           cout << BLUE << "2 - Human v AI." << endl;
           cout << PINK << "3 - Donald Knuth AI. (Not implemented yet)" << endl;
-          cout << YELLOW << "4 - Exit." << endl;
+          cout << GREEN << "4 - Swaszek's Algorithm " << endl;
+          cout << YELLOW << "5 - Exit." << endl;
           cout << WHITE << "Enter your choice : ";
           cin >> choice;
 
@@ -37,7 +38,14 @@ int main()
                break;
 
           case 4:
-               cout << "Thank you for playing the game" << endl;
+               cout << RED << "Before we start you should know this algorithm uses ALL SEVEN COLORS!!!" << endl;
+               cout << WHITE << "Which are: " << YELLOW << "rgbywpc or equivalently -> " << obj.stringToColor("rgbywpc") << endl;
+               cout << endl;
+               obj.swaszekAlgorithm();
+          case 5:
+               cout << WHITE << "Thank you for playing the game" << endl;
+               cout << endl;
+
           default:
                break;
           }
