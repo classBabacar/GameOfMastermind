@@ -24,7 +24,20 @@ https://en.wikipedia.org/wiki/Mastermind_(board_game)
 
 - **7/6/2019** Structs are GREAT!!! It makes the code packagable and it helps with readibility.
 
-# Running Code
+# Docker Rules
+Since operating systems are so specific about their color codes, I couldn't make this program work on both windows and linux. However, with the help of docker this problem is solved slightly...which can allow users to simulate a OS (simply put).
+
+Step 1 : Download Docker For Desktop or Docker-Toolbox.
+
+Step 2 : In the **Connect4WithAi** directory, do the following : ``docker build -t test . ``
+
+Step 3 : Next : `` docker run -it test /bin/sh ``
+
+Step 4 : Now you are in the Docker shell and can operate it as if it was a linux machine.
+
+Step 5 : Read the part of this README that says : `` Running Code using Makefile``
+
+# Running Code using Makefile
 
 I recommend that you compile with ``make build`` or ``make``
 
