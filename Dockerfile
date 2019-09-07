@@ -1,13 +1,13 @@
 # All of the install instructions are using alpine linux syntax
 FROM alpine:edge 
 
-# Making connect 4 directory
+# Making mastermind directory
 RUN mkdir /mastermind
 
-# GCC Dependency 
+# GCC Dependency
 RUN apk add build-base
 
-# Copying everything into Connect Four folder
+# Copying everything into mastermind folder
 COPY ./ mastermind
 
 # Setting working directory
