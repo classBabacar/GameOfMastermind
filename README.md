@@ -29,7 +29,7 @@ Since operating systems are so specific about their color codes, I couldn't make
 
 Step 1 : Download Docker For Desktop or Docker-Toolbox.
 
-Step 2 : In the **Connect4WithAi** directory, do the following : ``docker build -t test . ``
+Step 2 : In the **GameOfMastermind** directory, do the following : ``docker build -t test . ``
 
 Step 3 : Next : `` docker run -it test /bin/sh ``
 
