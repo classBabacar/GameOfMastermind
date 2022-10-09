@@ -22,4 +22,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           
     - name: push to GitHub Container Registry
-      run:  docker push ghcr.io/myimage/inhouse_bot
+      run:  docker push ghcr.io/inhouse_bot/inhouse_bot:latest
